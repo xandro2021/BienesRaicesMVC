@@ -1,0 +1,92 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.derecha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include m.tablet {
+        align-items: flex-end;
+    }
+
+    .dark-mode-boton {
+        width: 3rem;
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+        filter: invert(100%);
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        @include m.tablet {
+            margin-top: 0px;
+        }
+    }
+}
+
+.barra {
+    display: flex;
+    flex-direction: column;
+    padding-top: 3rem;
+    align-items: center;
+
+    @include m.tablet {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+
+    >a {
+        width: 40rem;
+    }
+}
+
+
+.navegacion {
+    visibility: hidden;
+    opacity: 0;
+    height: 0px;
+    margin-bottom: 2rem;
+    transition: visibility .3s ease-in-out, opacity 0.5s linear, height .3s linear;
+
+    @include m.tablet {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    a {
+        color: v.$blanco;
+        text-decoration: none;
+        font-size: 2.2rem;
+        display: block;
+        text-align: center;
+
+        &:hover {
+            color: v.$verde;
+        }
+    }
+}
+
+/* MENU HAMBURGUESA */
+.mobile-menu {
+    cursor: pointer;
+
+    @include m.tablet {
+        display: none;
+    }
+
+    img {
+        width: 5rem;
+    }
+}
+
+.mostrar {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+}

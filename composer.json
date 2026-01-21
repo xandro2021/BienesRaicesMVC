@@ -1,0 +1,19 @@
+{
+    "name": "xandro2021/bienes-raices",
+    "description": "Creando un proyecto con POO",
+    "type": "project",
+    "authors": [
+        {
+            "name": "xandro2021",
+            "email": "xandrocastro2021@gmail.com"
+        }
+    ],
+    "require": {
+        "intervention/image": "^3.11"
+    },
+    "autoload":  {
+        "psr-4": {
+            "App\\": "./models"
+        }
+    }
+}
