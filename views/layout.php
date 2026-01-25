@@ -22,13 +22,14 @@ if (!isset($inicio)) {
     <meta name="description" content="Pagina de inicio del sitio de bienes raíces">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="preload" href="build/css/app.min.css" as="style" />
-    <link rel="stylesheet" href="build/css/app.min.css" type="text/css" media="screen" />
+    <link rel="preload" href="/build/css/app.min.css" as="style" />
+    <link rel="stylesheet" href="/build/css/app.min.css" type="text/css" media="screen" />
 
 </head>
 
 <body>
 
+    <!-- Cargado -->
     <header class="header <?php echo $inicio ? 'inicio' : ''; ?>">
         <div class="contenedor contenido-header">
             <div class="barra">
@@ -75,7 +76,7 @@ if (!isset($inicio)) {
         <p class="copyright">Todos los derechos Reservados <?php echo date('Y'); ?> &copy;</p>
     </footer>
 
-    <script type="text/javascript" src="build/js/bundle.min.js"></script>
+    <script type="text/javascript" src="/build/js/bundle.min.js"></script>
 </body>
 
 </html>

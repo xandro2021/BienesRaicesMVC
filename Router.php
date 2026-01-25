@@ -12,6 +12,11 @@ class Router
         $this->rutasGET[$url] = $fn;
     }
 
+    public function post($url, $fn)
+    {
+        $this->rutasPOST[$url] = $fn;
+    }
+
     public function comprobarRutas()
     {
 
@@ -21,10 +26,12 @@ class Router
         if ($metodo === 'GET') {
             $fn = $this->rutasGET[$urlActual] ?? null;
         }
+        else {
+            $fn = $this->rutasPOST[$urlActual] ?? null;
+        }
 
         // Si la url existe
         if ($fn) {
-
             // Llamar de forma dinamica una funcion cuando no sabamos como se llama debido a que hay varias opciones
             call_user_func($fn, $this);
         } else {
@@ -35,6 +42,7 @@ class Router
     // Muestra una vista
     public function render($view, $datos = []) {
 
+        // convertir los datos en variables que se puedan usar facilmente
         foreach ($datos as $key => $value) {
             // convierte la key en el nombre de la nueva variable $$
             $$key = $value;
