@@ -74,8 +74,55 @@ class PropiedadController
         ]);
     }
 
-    public static function actualizar()
+    public static function actualizar(Router $router)
     {
-        echo "Actualizar Propiedad";
+        $id = validarORedireccionar('/admin');
+
+        $propiedad = Propiedad::find($id);
+        $errores = Propiedad::getErrores();
+        $vendedores = Vendedor::all();
+
+        // Metodo POST para actualizar
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            // asignar los atributos
+            $args = $_POST['propiedad'];
+
+            $propiedad->sincronizar($args);
+
+            // Validacion
+            $errores = $propiedad->validar();
+
+            // Subida de archivos
+            if ($_FILES['propiedad']['tmp_name']['imagen']) {
+                // Generar un nombre unico
+                $nombreImagen = uniqid('', true);
+                $extension = "." . pathinfo($_FILES['propiedad']['name']['imagen'], PATHINFO_EXTENSION);
+                $nombreImagen .= $extension;
+
+                $manager = new Image(Driver::class);
+                // leer imagen
+                $image = $manager->read($_FILES['propiedad']['tmp_name']['imagen'])->cover(800, 600);
+                // guardo nombre de imagen
+                $propiedad->setImagen($nombreImagen);
+            }
+
+            // Revisar que el arreglo de errores este vacío
+            if (empty($errores)) {
+
+                // si hay una imagen en la global de files
+                if ($_FILES['propiedad']['tmp_name']['imagen']) {
+                    $image->save(CARPETA_IMAGENES . $nombreImagen);
+                }
+
+                $propiedad->guardar();
+            }
+        }
+
+        $router->render('propiedades/actualizar', [
+            'propiedad' => $propiedad,
+            'vendedores' => $vendedores,
+            'errores' => $errores,
+        ]);
     }
 }
