@@ -36,7 +36,7 @@
                     </td>
                     <td>$ <?= $propiedad->precio ?></td>
                     <td>
-                        <form method="POST" class="w-100" action="">
+                        <form method="POST" class="w-100" action="/propiedades/eliminar">
                             <input type="hidden" name="id" value="<?= $propiedad->id ?>" />
                             <input type="hidden" name="tipo" value="propiedad" />
                             <input class="boton-rojo-block" type="submit" name="" value="Eliminar" />
