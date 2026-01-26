@@ -33,9 +33,33 @@ class VendedorController
         ]);
     }
 
-    public static function actualizar()
+    public static function actualizar(Router $router)
     {
-        echo "Actualizar vendedor";
+        $errores = Vendedor::getErrores();
+
+        $id = validarORedireccionar('/admin');
+
+        $vendedor = Vendedor::find($id);
+
+        // Ejecutar el codigo despues del que el usuario envia el formulario
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Asignar los valores
+            $args = $_POST['vendedor'];
+            // Sincronizar objeto en memoria con lo que el usuario ha ingresado
+            $vendedor->sincronizar($args);
+
+            // Validacion
+            $errores = $vendedor->validar();
+
+            if (empty($errores)) {
+                $vendedor->guardar();
+            }
+        }
+
+        $router->render('/vendedores/actualizar', [
+            'errores' => $errores,
+            'vendedor' => $vendedor,
+        ]);
     }
 
     public static function eliminar()
