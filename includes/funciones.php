@@ -34,7 +34,7 @@ function s($html): string
 }
 
 // Validar tipo de contenido
-function validarTipoContenido($tipo)
+function validarTipoContenido($tipo) : bool
 {
     $tipos = ['vendedor', 'propiedad'];
     return in_array($tipo, $tipos);
