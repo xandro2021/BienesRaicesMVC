@@ -50,7 +50,7 @@ if (!isset($inicio)) {
                         <a href="/contacto">Contacto</a>
 
                         <?php if ($auth): ?>
-                            <a href="/cerrar-sesion">Cerrar Sesión</a>
+                            <a href="/logout">Cerrar Sesión</a>
                         <?php endif; ?>
 
                     </nav>
